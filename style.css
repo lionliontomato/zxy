@@ -33,30 +33,20 @@ body{
   color:var(--ink);
   font-family:'Zen Maru Gothic','Noto Serif TC',system-ui,sans-serif;
   overflow-x:hidden;
-  background:
-    radial-gradient(circle at 10% 12%, rgba(255,255,255,.96), transparent 16%),
-    radial-gradient(circle at 86% 12%, rgba(255,232,143,.86), transparent 24%),
-    radial-gradient(circle at 18% 74%, rgba(88,199,243,.30), transparent 34%),
-    radial-gradient(circle at 78% 76%, rgba(255,142,85,.24), transparent 32%),
-    radial-gradient(circle at 48% 44%, rgba(255,255,255,.48), transparent 24%),
-    linear-gradient(180deg,#fff8cf 0%,#ffe270 24%,#ffc93c 50%,#ffd95b 74%,#fff0a8 100%);
-}
+  background-color:#ffe46b;
 
-/* 桌機背景：用原本滿版圖片，不壓縮左右上角 */
-.bg-art{
-  display:block;
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  background-image:url("assets/bg-desktop.png");
-  background-size:cover;
-  background-position:center center;
+  /* 桌機版背景：完整寬度顯示，避免左上、右上被裁切 */
+  background-image:
+    linear-gradient(rgba(255,255,255,.06), rgba(255,255,255,.14)),
+    url("assets/bg-desktop.png");
+  background-size:100% auto;
+  background-position:center top;
   background-repeat:no-repeat;
-  opacity:1;
+  background-attachment:fixed;
 }
 
-/* 關閉舊裝飾層，避免重疊 */
+/* 關掉原本 bg-art，避免 cover 裁切左右上角 */
+.bg-art,
 .bg-blossom,
 .bg-clouds,
 .bg-mountain,
@@ -515,14 +505,14 @@ body::after{
 /* 手機背景 */
 @media(max-width:768px){
   body{
+    background-color:#ffe46b;
     background-image:
-      linear-gradient(rgba(255,255,255,.10), rgba(255,255,255,.22)),
+      linear-gradient(rgba(255,255,255,.18), rgba(255,255,255,.34)),
       url("assets/bg-mobile.png");
-    background-size:cover;
+    background-size:100% auto;
     background-position:center top;
     background-repeat:no-repeat;
     background-attachment:scroll;
-    background-color:#ffe46b;
   }
 
   .bg-art{
@@ -530,12 +520,7 @@ body::after{
   }
 
   .float-layer{
-    opacity:.35;
-  }
-
-  .float{
-    font-size:clamp(16px,5vw,26px);
-    opacity:.24;
+    display:none!important;
   }
 }
 
@@ -544,12 +529,12 @@ body::after{
   .wrap{
     width:100%;
     max-width:430px;
-    padding:18px 14px 46px;
+    padding:24px 14px 50px;
     margin:0 auto;
   }
 
   .hero{
-    padding:22px 18px 24px;
+    padding:24px 18px;
     border-radius:28px;
     margin-top:6px;
   }

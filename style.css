@@ -264,21 +264,217 @@ body::before,body::after{content:none!important}
 .close{margin-top:16px;border:0;border-radius:999px;background:var(--main);color:white;padding:11px 20px;font-weight:800;cursor:pointer}
 .site-footer{position:relative;z-index:2;max-width:980px;margin:40px auto 24px;padding:22px 18px;text-align:center;font-family:'Zen Maru Gothic','Noto Serif TC',serif;color:rgba(63,47,18,.86);font-size:14px;line-height:1.8}
 .site-footer p{margin:4px 0}.site-footer a{color:rgba(63,47,18,.95);text-decoration:none;border-bottom:1px solid rgba(63,47,18,.35)}.site-footer a:hover{opacity:.75}
+
 @media(max-width:1024px){
  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
+
 @media(max-width:860px){
  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+
+/* ======================================================
+   2026-06-27 手機版修正版
+   修正：
+   1. 手機主卡片太高
+   2. 歌單卡片只出現一張或後面不見
+   3. 背景圖手機版裁切怪
+   ====================================================== */
 @media(max-width:680px){
- .float{font-size:calc(var(--size) * .9);opacity:.95}
- .bg-art{background-image:url('assets/bg-mobile.png');background-position:center center}
- .wrap{padding:24px 14px 50px}
- .hero{padding:24px 18px;border-radius:28px}
- .controls{grid-template-columns:1fr}
- .random{height:50px}
- .grid{grid-template-columns:1fr}
- .tag{padding:10px 13px}
- .card::after{right:14px;top:12px;width:52px;height:52px;font-size:30px}
- .song{padding-right:64px}
+ html,
+ body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden!important;
+ }
+
+ body{
+  min-height:100svh;
+ }
+
+ .bg-art{
+  background-image:url('assets/bg-mobile.png')!important;
+  background-size:100% auto!important;
+  background-position:center top!important;
+  background-repeat:repeat-y!important;
+  background-color:#ffe46b!important;
+ }
+
+ .float-layer{
+  opacity:.45;
+ }
+
+ .float{
+  font-size:calc(var(--size) * .85);
+ }
+
+ .wrap{
+  width:100%!important;
+  max-width:430px!important;
+  margin:0 auto!important;
+  padding:10px 12px 36px!important;
+ }
+
+ .hero{
+  padding:20px 16px 24px!important;
+  border-radius:28px!important;
+  margin-top:8px!important;
+ }
+
+ .eyebrow{
+  font-size:14px!important;
+  padding:7px 12px!important;
+ }
+
+ .hero h1{
+  font-size:38px!important;
+  line-height:1.15!important;
+  margin:14px 0 8px!important;
+  letter-spacing:.04em!important;
+ }
+
+ .hero p{
+  font-size:18px!important;
+  line-height:1.6!important;
+  margin:0 0 20px!important;
+ }
+
+ .controls{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:12px!important;
+  width:100%!important;
+  margin:0 0 18px!important;
+ }
+
+ .search{
+  width:100%!important;
+  height:54px!important;
+  font-size:16px!important;
+  padding:0 18px!important;
+ }
+
+ .random{
+  width:100%!important;
+  height:54px!important;
+  font-size:18px!important;
+ }
+
+ .tags{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:center!important;
+  gap:10px!important;
+  margin:18px 0 20px!important;
+ }
+
+ .tag{
+  font-size:15px!important;
+  padding:8px 14px!important;
+ }
+
+ .meta{
+  display:block!important;
+  width:100%!important;
+  text-align:center!important;
+  margin:20px 0 12px!important;
+  font-size:18px!important;
+ }
+
+ .status{
+  position:static!important;
+  display:block!important;
+  margin-bottom:6px!important;
+  text-align:center!important;
+ }
+
+ #count{
+  display:block!important;
+  width:100%!important;
+  text-align:center!important;
+  margin:0 auto!important;
+ }
+
+ /* 歌單區：手機版強制一張一列，避免卡片消失 */
+ .grid{
+  display:flex!important;
+  flex-direction:column!important;
+  width:100%!important;
+  gap:16px!important;
+  align-items:stretch!important;
+ }
+
+ .card{
+  display:block!important;
+  position:relative!important;
+  width:100%!important;
+  min-height:170px!important;
+  height:auto!important;
+  padding:22px 18px 62px!important;
+  border-radius:26px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+
+  visibility:visible!important;
+  opacity:1!important;
+  transform:none!important;
+  content-visibility:visible!important;
+  contain:none!important;
+ }
+
+ .card:hover{
+  transform:none!important;
+ }
+
+ .song{
+  display:block!important;
+  font-size:30px!important;
+  line-height:1.25!important;
+  margin:0 76px 12px 0!important;
+  padding-right:0!important;
+  word-break:break-word!important;
+ }
+
+ .artist{
+  display:block!important;
+  font-size:18px!important;
+  line-height:1.5!important;
+  margin:0 0 14px!important;
+ }
+
+ .cat{
+  display:inline-block!important;
+  font-size:16px!important;
+  line-height:1.4!important;
+  padding:7px 13px!important;
+ }
+
+ .card::after{
+  position:absolute!important;
+  width:58px!important;
+  height:58px!important;
+  right:18px!important;
+  top:18px!important;
+  font-size:30px!important;
+  z-index:0!important;
+ }
+
+ .copy{
+  position:absolute!important;
+  right:18px!important;
+  bottom:18px!important;
+  font-size:15px!important;
+  padding:8px 14px!important;
+  z-index:2!important;
+ }
+
+ .empty{
+  width:100%!important;
+ }
+
+ .site-footer{
+  margin-top:22px!important;
+  font-size:12px!important;
+  line-height:1.7!important;
+ }
 }

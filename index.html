@@ -9,9 +9,9 @@
  <title>小亦の歌單</title>
  <link href="https://fonts.googleapis.com" rel="preconnect" />
  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
-   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍽️</text></svg>" />
+ <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍽️</text></svg>" />
  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Zen+Maru+Gothic:wght@400;500;700;800&display=swap" rel="stylesheet" />
- <link href="style.css?v=20260626-i-column-live-v3" rel="stylesheet" />
+ <link href="style.css?v=20260627-mobile-fix4" rel="stylesheet" />
 </head>
 <body>
  <div class="bg-art"></div>
@@ -25,27 +25,37 @@
  <div class="bg-scroll"></div>
  <div class="bg-fan"></div>
  <div class="float-layer" id="floatLayer"></div>
+
  <main class="wrap">
   <section class="hero">
    <span class="eyebrow">♫</span>
    <h1 id="siteTitle"></h1>
    <p id="siteSubtitle"></p>
+
    <div class="controls">
     <input class="search" id="search" placeholder="搜尋歌名、歌手或分類…" />
     <button class="random" id="randomBtn" type="button">隨機抽歌</button>
    </div>
+
    <div class="tags" id="tags"></div>
-   <div class="meta"><span id="count">讀取中…</span><span class="status" id="status"></span></div>
+
+   <div class="meta">
+    <span id="count">讀取中…</span>
+    <span class="status" id="status"></span>
+   </div>
   </section>
+
   <section class="grid" id="grid"></section>
   <div class="empty" id="empty">沒有找到符合條件的歌曲</div>
  </main>
+
  <footer class="site-footer">
   <p id="footer1">© 2026 LionLionTomato. All Rights Reserved.</p>
   <p id="footer2">本網站係由作者本人原創之歌單網站架構延伸製作。</p>
   <p id="footer3">本網站內容、版面設計與程式架構未經授權不得重製、改作或商業使用。</p>
   <p><a href="copyright.html">著作權聲明與使用條款</a></p>
  </footer>
+
  <div class="modal" id="modal">
   <div class="modal-card">
    <h2 id="modalTitle">小亦推薦</h2>
@@ -54,6 +64,7 @@
    <button class="close" id="closeModal" type="button">好聽愛聽</button>
   </div>
  </div>
- <script src="./script.js?v=20260626-i-column-live-v3"></script>
+
+ <script src="./script.js?v=20260627-mobile-fix4"></script>
 </body>
 </html>

@@ -33,20 +33,30 @@ body{
   color:var(--ink);
   font-family:'Zen Maru Gothic','Noto Serif TC',system-ui,sans-serif;
   overflow-x:hidden;
-  background-color:#ffe46b;
-
-  /* 參考慌慌歌單寫法：背景直接放 body，手機比較穩 */
-  background-image:
-    linear-gradient(rgba(255,255,255,.08), rgba(255,255,255,.18)),
-    url("assets/bg-desktop.png");
-  background-size:100% auto;
-  background-position:center bottom;
-  background-repeat:no-repeat;
-  background-attachment:fixed;
+  background:
+    radial-gradient(circle at 10% 12%, rgba(255,255,255,.96), transparent 16%),
+    radial-gradient(circle at 86% 12%, rgba(255,232,143,.86), transparent 24%),
+    radial-gradient(circle at 18% 74%, rgba(88,199,243,.30), transparent 34%),
+    radial-gradient(circle at 78% 76%, rgba(255,142,85,.24), transparent 32%),
+    radial-gradient(circle at 48% 44%, rgba(255,255,255,.48), transparent 24%),
+    linear-gradient(180deg,#fff8cf 0%,#ffe270 24%,#ffc93c 50%,#ffd95b 74%,#fff0a8 100%);
 }
 
-/* 關掉舊背景圖層，避免手機版背景重複或斷裂 */
-.bg-art,
+/* 桌機背景：用原本滿版圖片，不壓縮左右上角 */
+.bg-art{
+  display:block;
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-image:url("assets/bg-desktop.png");
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+  opacity:1;
+}
+
+/* 關閉舊裝飾層，避免重疊 */
 .bg-blossom,
 .bg-clouds,
 .bg-mountain,
@@ -273,7 +283,7 @@ body::after{
   color:#9a6500;
 }
 
-/* 歌單區：參考慌慌寫法 */
+/* 歌單區 */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
@@ -283,6 +293,7 @@ body::after{
 .card{
   position:relative;
   min-height:150px;
+  height:auto;
   padding:22px 18px 56px;
   border-radius:var(--radius);
   background:linear-gradient(145deg,rgba(255,255,255,.88),rgba(255,249,223,.78));
@@ -377,6 +388,21 @@ body::after{
 .copy.done{
   background:var(--main);
   color:white;
+}
+
+/* 載入更多按鈕 */
+.load-more{
+  display:none;
+  margin:20px auto 0;
+  padding:12px 26px;
+  border:0;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--main),var(--main-900));
+  color:#fff;
+  font-weight:800;
+  font-size:16px;
+  box-shadow:0 12px 26px rgba(133,91,0,.22);
+  cursor:pointer;
 }
 
 /* 空資料 */
@@ -486,24 +512,25 @@ body::after{
   opacity:.75;
 }
 
-/* 平板 */
-@media(max-width:900px){
-  body{
-    background-size:100% auto;
-    background-position:center bottom;
-  }
-}
-
-/* 手機版背景 */
+/* 手機背景 */
 @media(max-width:768px){
   body{
     background-image:
-      linear-gradient(rgba(255,255,255,.14), rgba(255,255,255,.26)),
+      linear-gradient(rgba(255,255,255,.10), rgba(255,255,255,.22)),
       url("assets/bg-mobile.png");
-    background-size:100% auto;
+    background-size:cover;
     background-position:center top;
-    background-repeat:repeat-y;
+    background-repeat:no-repeat;
     background-attachment:scroll;
+    background-color:#ffe46b;
+  }
+
+  .bg-art{
+    display:none!important;
+  }
+
+  .float-layer{
+    opacity:.35;
   }
 
   .float{
@@ -512,22 +539,46 @@ body::after{
   }
 }
 
-/* 手機版排版 */
+/* 手機排版 */
 @media(max-width:680px){
   .wrap{
-    padding:24px 14px 50px;
+    width:100%;
+    max-width:430px;
+    padding:18px 14px 46px;
+    margin:0 auto;
   }
 
   .hero{
-    padding:24px 18px;
+    padding:22px 18px 24px;
     border-radius:28px;
+    margin-top:6px;
+  }
+
+  .hero h1{
+    font-size:38px;
+    line-height:1.15;
+    margin:14px 0 8px;
+  }
+
+  .hero p{
+    font-size:17px;
+    line-height:1.65;
   }
 
   .controls{
+    display:grid;
     grid-template-columns:1fr;
+    gap:12px;
+    width:100%;
+  }
+
+  .search{
+    height:52px;
+    font-size:16px;
   }
 
   .random{
+    width:100%;
     height:50px;
   }
 
@@ -535,18 +586,47 @@ body::after{
     justify-content:center;
   }
 
+  .meta{
+    display:block;
+    text-align:center;
+  }
+
+  .status{
+    position:static;
+    display:block;
+    margin-bottom:6px;
+    text-align:center;
+  }
+
   .grid{
+    display:grid;
     grid-template-columns:1fr;
     gap:16px;
   }
 
-  .tag{
-    padding:10px 13px;
+  .card{
+    width:100%;
+    min-height:150px;
+    height:auto;
+    padding:22px 18px 56px;
+    border-radius:26px;
+    overflow:hidden;
   }
 
-  .card{
-    min-height:150px;
-    padding:22px 18px 56px;
+  .song{
+    font-size:24px;
+    line-height:1.35;
+    padding-right:64px;
+    margin-bottom:9px;
+  }
+
+  .artist{
+    font-size:15px;
+    margin-bottom:12px;
+  }
+
+  .cat{
+    font-size:13px;
   }
 
   .card::after{
@@ -557,39 +637,8 @@ body::after{
     font-size:30px;
   }
 
-  .song{
-    padding-right:64px;
-  }
-
-  .status{
-    position:static;
-    display:block;
-    margin-bottom:6px;
-    text-align:center;
-  }
-
-  .meta{
-    display:block;
-    text-align:center;
-  }
-}
-
-/* 更小手機 */
-@media(max-width:480px){
-  body{
-    background-image:
-      linear-gradient(rgba(255,255,255,.16), rgba(255,255,255,.30)),
-      url("assets/bg-mobile.png");
-    background-size:100% auto;
-    background-position:center top;
-    background-repeat:repeat-y;
-  }
-
-  .hero h1{
-    font-size:38px;
-  }
-
-  .float{
-    opacity:.18;
+  .copy{
+    right:14px;
+    bottom:14px;
   }
 }
